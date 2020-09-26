@@ -1,25 +1,27 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
-import logo from './logo.svg'
-import './App.css'
+//import './App.css'
 import store from './store'
-import Customers from './components/Customer/customers'
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Login from "./components/pages/Login";
+import Home from "./components/pages/Home";
+import Blog from "./components/pages/Blog";
 
 class App extends Component {
-
-  render () {
+  render() {
     return (
-      <Provider store={ store }>
-        <div className="App">
-          <header className="App-header">
-            <img src={ logo } className="App-logo" alt="logo"/>
-            <h1 className="App-title">React/Redux Express Starter</h1>
-          </header>
-          <Customers/>
-        </div>
+      <Provider store={store}>
+        <Router>
+          <div>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/blog" component={Blog} />
+          </div>
+        </Router>
       </Provider>
-    )
+    );
   }
 }
 
-export default App
+export default App;
