@@ -1,15 +1,14 @@
 const express = require('express');
+const mongoose = require("mongoose");
 
 const app = express();
 
-app.get('/api/customers', (req, res) => {
-  const customers = [
-    {id: 1, firstName: 'Lucas', lastName: 'Dee'},
-    {id: 2, firstName: 'Fred', lastName: 'Burrows'},
-    {id: 3, firstName: 'Barbara', lastName: 'Swanson'},
-  ];
 
-  res.json(customers);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/trailsDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
 });
 
 const PORT = process.env.PORT || 5000;
