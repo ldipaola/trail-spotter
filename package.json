@@ -14,8 +14,11 @@
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "concurrently": "^4.1.2",
     "express": "^4.17.1",
-    "nodemon": "^1.19.4"
+    "mongoose": "^5.10.7",
+    "nodemon": "^1.19.4",
+    "passport": "^0.4.1"
   }
 }
