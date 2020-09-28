@@ -1,9 +1,17 @@
 const express = require('express');
 const mongoose = require("mongoose");
+const passport = require("./config/passport");
+
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(passport.initialize());
+app.use(passport.session());
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/trailsDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -11,6 +19,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/trailsDB", {
   useFindAndModify: false,
 });
 
-const PORT = process.env.PORT || 5000;
+app.use(require("./routes/api-routes.js"));
+
 
 app.listen(PORT, () => `Server running on port ${PORT}`);
