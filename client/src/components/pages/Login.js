@@ -57,7 +57,7 @@ export default function Login(props) {
             <div className="card-body">
               <form className="form-horizontal" onSubmit={handleSubmit}>
                 <div className="form-group">
-                  <label className="form-label" for="login-email">
+                  <label className="form-label" htmlFor="login-email">
                     Email
                   </label>
                   <input
@@ -68,7 +68,7 @@ export default function Login(props) {
                     onChange={handleChange}
                   />
                   <br />
-                  <label className="form-label" for="login-password">
+                  <label className="form-label" htmlFor="login-password">
                     Password
                   </label>
                   <input
