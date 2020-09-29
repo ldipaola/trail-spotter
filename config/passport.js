@@ -12,7 +12,7 @@ passport.use(
     },
     (email, password, done) => {
       // When a user tries to sign in this code runs
-      db.User.find({
+      db.User.findOne({
         where: {
           email: email
         }
