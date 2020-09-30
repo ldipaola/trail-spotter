@@ -17,7 +17,7 @@ export default function Navbar() {
       </section>
       <section className="navbar-center"></section>
       <section className="navbar-section">
-        <Link to="#" className="btn btn-link">
+        <Link to="/signup" className="btn btn-link">
           Sign Up
         </Link>
         <Link to="/login" className="btn btn-link">
