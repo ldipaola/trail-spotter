@@ -3,12 +3,12 @@ const router = require("express").Router();
 const db = require('../models');
 const ObjectId = require('mongodb').ObjectId;
 const passport = require("../config/passport");
-const { User } = require("../models");
 
 
 router.get("/api/blog", (req, res) => {
     // Will add to this later
-    res.json("Test")
+    res.json({
+      test:"test blog"})
 });
 
   // Using the passport.authenticate middleware with our local strategy.
@@ -21,14 +21,13 @@ router.get("/api/blog", (req, res) => {
     });
   });
 
-  // Route for signing up a user. The user's password is automatically hashed and stored securely. If the user is created successfully, proceed to log the user in,
+  // Route for signing up a user. The user's password is automatically hashed and stored securely.
   // otherwise send back an error
   router.post("/api/signup", async (req, res) => {
-      const user = new User(req.body);
-
+      const user = new db.User(req.body);
       try {
         await user.save();
-        res.redirect(307, "/api/login");
+        res.json("Success");
       } catch (e) {
         res.status(401).json(err);
       }
@@ -44,16 +43,12 @@ router.get("/api/blog", (req, res) => {
   router.get("/api/user_data", (req, res) => {
     if (!req.user) {
       // The user is not logged in, send back an empty object
-      res.json({
-          email: req.user.email,
-          id: req.user.id
-        });
+      res.json({});
     } else {
-      // Otherwise send back the user's email and id
-      // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
-        id: req.user.id
+        id: req.user._id,
+        createdAt: req.user.createdAt,
       });
     }
   });
