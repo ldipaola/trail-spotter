@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Blog(props) {
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const fetchUserData = () => {
+    fetch("/api/blog")
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData(data);
+      });
+  };
+
   return (
     <div>
       <h1>Blog Page</h1>
+      <h3>{userData.test}</h3>
       <p>
         Donec a volutpat quam. Curabitur nec varius justo, sed rutrum ligula.
         Curabitur pellentesque turpis sit amet eros iaculis, a mollis arcu
