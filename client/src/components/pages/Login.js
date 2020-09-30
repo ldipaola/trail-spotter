@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 export default function Login(props) {
+  let history = useHistory();
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: ""
@@ -22,6 +24,7 @@ export default function Login(props) {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
+        history.push("/")
       })
       .catch((error) => {
         console.error("Error:", error);
