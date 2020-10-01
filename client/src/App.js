@@ -9,6 +9,7 @@ import Signup from "./components/pages/Signup"
 import Home from "./components/pages/Home";
 import Blog from "./components/pages/Blog";
 import User from "./components/pages/User";
+import Hero from "./components/hero/Hero"
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
         <Router>
           <div>
             <Navbar />
+            <Hero />
             <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
