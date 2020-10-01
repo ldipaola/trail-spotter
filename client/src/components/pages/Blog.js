@@ -16,7 +16,7 @@ export default function Blog(props) {
   };
 
   return (
-    <div>
+    <div className="container grid-lg">
       <h1>Blog Page</h1>
       <h3>{userData.test}</h3>
       <p>
