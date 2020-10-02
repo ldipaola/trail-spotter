@@ -53,4 +53,17 @@ router.get("/api/blog", (req, res) => {
     }
   });
 
+  router.post("/api/post", async (req, res) => {
+    const {title, author, body} = req.body;
+    await db.Blog.create(
+    {
+      title:  title,
+      author: author,
+      body:   body,
+    }
+    ).then((blogPost) => {
+      res.json(blogPost);
+    }).catch((err) => console.log(err)) 
+  });
+
 module.exports = router;
