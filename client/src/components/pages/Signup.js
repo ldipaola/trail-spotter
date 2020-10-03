@@ -10,9 +10,6 @@ export default function Signup(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target);
-    console.log(loginDetails)
-
     
     fetch("/api/signup", {
       method: "POST", 

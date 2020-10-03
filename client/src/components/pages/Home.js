@@ -1,10 +1,14 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import UserContext from "../../utils/UserContext";
 
 export default function Home(props) {
+  const { user } = useContext(UserContext);
+
   return (
     <div>
       <h1>Welcome</h1>
+
+      {user ? <pre>{user.email}</pre> : <pre>Not Logged in</pre>}
       <p>
         Donec a volutpat quam. Curabitur nec varius justo, sed rutrum ligula.
         Curabitur pellentesque turpis sit amet eros iaculis, a mollis arcu

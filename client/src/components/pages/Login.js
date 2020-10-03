@@ -1,53 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { login } from "../../utils/login"
+import UserContext from "../../utils/UserContext"
 
-export default function Login(props) {
+export default function Login() {
+
+  const { user, setUser } = useContext(UserContext);
+
   let history = useHistory();
-  const [loginDetails, setLoginDetails] = useState({
-    email: "",
-    password: ""
-  })
+ 
+  const [loginEmail, setLoginEmail] = useState("")
+  const [loginPassword, setLoginPassword] = useState("")
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(event.target);
-    console.log(loginDetails)
-
-    
-    fetch("/api/login", {
-      method: "POST", 
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loginDetails),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-        history.push("/")
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-    
-
-  }
-
-  const handleChange = (event) => {
-    const value = event.target.value;
-    if (event.target.id === "login-email") {
-      setLoginDetails({
-        ...loginDetails,
-        email: value,
-      })
-    }
-    else if (event.target.id === "login-password"){
-      setLoginDetails({
-        ...loginDetails,
-        password: value,
-      })
-    }
-  }
+    const user = await login(loginEmail, loginPassword)
+    console.log(user);
+    setUser(user);
+    history.push("/");
+      
+  };
 
   return (
     <div className="container">
@@ -68,7 +40,7 @@ export default function Login(props) {
                     type="text"
                     id="login-email"
                     placeholder="Email"
-                    onChange={handleChange}
+                    onChange={(e) => setLoginEmail(e.target.value)}
                   />
                   <br />
                   <label className="form-label" htmlFor="login-password">
@@ -79,7 +51,7 @@ export default function Login(props) {
                     type="password"
                     id="login-password"
                     placeholder="Password"
-                    onChange={handleChange}
+                    onChange={(e) => setLoginPassword(e.target.value)}
                   />
                 </div>
 
