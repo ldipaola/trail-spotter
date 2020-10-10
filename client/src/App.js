@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react'
-import { Provider } from 'react-redux'
-import store from './store'
+import React, { useState, useMemo } from 'react';
+import { Provider } from 'react-redux';
+import store from './store';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/nav/Navbar"
 import Login from "./components/pages/Login";
@@ -10,7 +10,8 @@ import Blog from "./components/pages/Blog";
 import User from "./components/pages/User";
 import Admin from "./components/pages/Admin";
 import Hero from "./components/hero/Hero";
-import UserContext from "./utils/UserContext"
+import UserContext from "./utils/UserContext";
+import Map from "./components/pages/Map";
 
 function App()  {
 
@@ -30,6 +31,7 @@ function App()  {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/" component={Home} />
+            <Route path="/map" component={Map} />
             <Route path="/blog" component={Blog} />
             <Route path="/user" component={User} />
             <Route path="/admin" component={Admin} />
