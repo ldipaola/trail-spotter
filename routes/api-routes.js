@@ -45,8 +45,8 @@ router.get("/logout", (req, res) => {
 // Route for getting some data about our user to be used client side
 router.get("/api/userAuthenticated", (req, res) => {
   if (!req.user) {
-    // The user is not logged in, send back an empty object
-    res.json({});
+    // The user is not logged in, send back null
+    res.json(null);
   } else {
     res.json({
       id: req.user._id,
