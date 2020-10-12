@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -18,6 +18,16 @@ function App()  {
   const [user, setUser] = useState(null);
 
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
+
+  useEffect(() => {
+      async function isLoggedIn() {
+        let response = await fetch('/api/userAuthenticated');
+        response = await response.json();
+        setUser(response);
+      }
+      isLoggedIn();
+  }, [])
+
 
 
     return (
