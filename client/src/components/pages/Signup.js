@@ -1,64 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import UserContext from "../../utils/UserContext";
+import axios from "axios";
+import { login } from "../../utils/login";
 
-export default function Signup(props) {
-    let history = useHistory();
-  const [loginDetails, setLoginDetails] = useState({
-    email: "",
-    password: ""
-  })
+export default function Signup() {
+  const { setUser } = useContext(UserContext);
 
-  const handleSubmit = (event) => {
+  let history = useHistory();
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    fetch("/api/signup", {
-      method: "POST", 
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loginDetails),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-        
-        fetch("/api/login", {
-            method: "POST", 
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(loginDetails),
-          }).then((response) => response.json())
-          .then((data) => {
-            console.log("Success:", data);
-            history.push("/")
-          }).catch((error) => {
-            console.error("Error:", error);
-          });
-
-      })
-      .catch((error) => {
-        console.error("Error:", error);
+    try {
+      const signup = await axios.post("/api/signup", {
+        email: signupEmail,
+        password: signupPassword,
       });
-    
-
-  }
-
-  const handleChange = (event) => {
-    const value = event.target.value;
-    if (event.target.id === "login-email") {
-      setLoginDetails({
-        ...loginDetails,
-        email: value,
-      })
+      const user = await login(signupEmail, signupPassword);
+      console.log(user);
+      if (user) {
+        setUser(user);
+        history.push("/");
+      }
+    } catch (err) {
+      console.log(err);
     }
-    else if (event.target.id === "login-password"){
-      setLoginDetails({
-        ...loginDetails,
-        password: value,
-      })
-    }
-  }
+  };
 
   return (
     <div className="container">
@@ -66,7 +35,9 @@ export default function Signup(props) {
         <div className="column col-3 col-mx-auto">
           <div className="card">
             <div className="card-header">
-              <div className="card-title h5">Signup to begin your adventure!</div>
+              <div className="card-title h5">
+                Signup to begin your adventure!
+              </div>
             </div>
             <div className="card-body">
               <form className="form-horizontal" onSubmit={handleSubmit}>
@@ -79,7 +50,7 @@ export default function Signup(props) {
                     type="text"
                     id="login-email"
                     placeholder="Email"
-                    onChange={handleChange}
+                    onChange={(e) => setSignupEmail(e.target.value)}
                   />
                   <br />
                   <label className="form-label" htmlFor="login-password">
@@ -90,7 +61,7 @@ export default function Signup(props) {
                     type="password"
                     id="login-password"
                     placeholder="Password"
-                    onChange={handleChange}
+                    onChange={(e) => setSignupPassword(e.target.value)}
                   />
                 </div>
 
@@ -98,7 +69,7 @@ export default function Signup(props) {
               </form>
             </div>
             <div className="card-footer">
-            Already have an account? Log in <a href="/login">here</a> 
+              Already have an account? Log in <a href="/login">here</a>
             </div>
           </div>
         </div>
