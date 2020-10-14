@@ -32,6 +32,10 @@ export default function Navbar() {
         <Link to="/about" className="btn btn-link nav-link">
           About
         </Link>
+        { user && user.isAdmin ?
+        <Link to="/admin" className="btn btn-link nav-link">
+          Admin
+        </Link> : null}
       </section>
       <section className="navbar-center"></section>
       {!user ? (
