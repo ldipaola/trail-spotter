@@ -18,22 +18,26 @@ router.post("/api/login", passport.authenticate("local"), (req, res) => {
   res.json({
     email: req.user.email,
     id: req.user.id,
+    isAdmin: req.user.isAdmin
   });
 });
 
 // Route for signing up a user. The user's password is automatically hashed and stored securely.
 // otherwise send back an error
 router.post("/api/signup", async (req, res) => {
-  db.User.findOne({ email: req.body.email }),
-    async (err, doc) => {
-      if (err) throw err;
-      if (doc) res.send("User Already Exists");
-      if (!doc) {
-        const user = new db.User(req.body);
-        await user.save();
-        res.send("Success");
-      }
-    };
+  const user = await db.User.findOne({ email: req.body.email });
+  if (user){ 
+    res.status(409);
+    res.send("Account already exists");}
+  else {
+     await db.User.create({
+      email: req.body.email,
+      password: req.body.password
+    });
+    res.status(200);
+    res.send("Success, user created");
+  }
+    
 });
 
 // Route for logging user out
