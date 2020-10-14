@@ -1,13 +1,14 @@
 import React, {useState} from "react";
-import ReactMapGL, {Marker} from "react-map-gl";
-import mapData from "../../data/pre_recweb_track.geojson";
+import ReactMapGL, {Marker, Source, Layer} from "react-map-gl";
+import mapData from "../../map/data/pre_recweb_track.geojson";
+import { dataLayer } from "../../map/map-style";
 
 export default function Map() {
     const [viewport, setViewport] = useState({
         longitude: 144.962316,
         latitude: -37.812282,
         width: "100vh",
-        height: "100vh",
+        height: "70vh",
         zoom: 10
     });
     
@@ -20,6 +21,9 @@ export default function Map() {
             }}
             mapStyle="mapbox://styles/lukey88/ckg329w4w06p319o0nqrlg6sc"
             >
+                <Source type="geojson" data={mapData}>
+                    <Layer {...dataLayer}/>
+                </Source>
             </ReactMapGL>
         </div>
     )
