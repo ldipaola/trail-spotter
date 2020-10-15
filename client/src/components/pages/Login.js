@@ -5,6 +5,7 @@ import UserContext from "../../utils/UserContext"
 
 export default function Login() {
 
+  const [loginError, setLoginError] = useState(false);
   const { user, setUser } = useContext(UserContext);
 
   let history = useHistory();
@@ -16,10 +17,15 @@ export default function Login() {
     event.preventDefault();
     const user = await login(loginEmail, loginPassword)
     console.log(user);
+    if (user) {
     setUser(user);
     history.push("/");
+    } else {
+      setLoginError(true);
+    }
       
   };
+
 
   return (
     <div className="container">
@@ -28,6 +34,7 @@ export default function Login() {
           <div className="card">
             <div className="card-header">
               <div className="card-title h5">Login to begin your adventure!</div>
+              {loginError ? <p className="form-input-hint" style={{color: "#E85600", margin: "0"}}>The email or password is invalid.</p> : null}
             </div>
             <div className="card-body">
               <form className="form-horizontal" onSubmit={handleSubmit}>
@@ -36,18 +43,19 @@ export default function Login() {
                     Email
                   </label>
                   <input
-                    className="form-input"
+                    className={"form-input " + (loginError ? "is-error" : "")}
                     type="text"
                     id="login-email"
                     placeholder="Email"
                     onChange={(e) => setLoginEmail(e.target.value)}
                   />
+                  
                   <br />
                   <label className="form-label" htmlFor="login-password">
                     Password
                   </label>
                   <input
-                    className="form-input"
+                    className={"form-input " + (loginError ? "is-error" : "")}
                     type="password"
                     id="login-password"
                     placeholder="Password"
