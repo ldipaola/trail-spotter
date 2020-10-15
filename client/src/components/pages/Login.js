@@ -28,7 +28,7 @@ export default function Login() {
 
 
   return (
-    <div className="container">
+    <div className="container" style={{margin: "0.8em"}}>
       <div className="columns">
         <div className="column col-3 col-mx-auto">
           <div className="card">
