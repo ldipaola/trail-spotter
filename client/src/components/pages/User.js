@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
+import axios from "axios";
 
 
-export default function User(props) {
+export default function User() {
 
 const [user, setUserData] = useState({})
     
     useEffect(() => {
-        fetch("/api/user_data").then((response) => response.json())
+        axios.get("/api/user_data")
       .then((data) => {
         console.log(data);
         setUserData(data);
