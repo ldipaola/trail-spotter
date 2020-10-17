@@ -13,7 +13,7 @@ export default function Map() {
     });
     
     return (
-        <div className="flex-centered" style={{margin: "8px 0 8px 0"}} >
+        <div className="flex-centered" style={{margin: "2em 0 8px 0"}} >
             <ReactMapGL {...viewport} 
             mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
             onViewportChange={viewport => {
