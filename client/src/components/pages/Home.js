@@ -5,7 +5,7 @@ export default function Home(props) {
   const { user } = useContext(UserContext);
 
   return (
-    <div className="container grid-lg">
+    <div className="container grid-lg" style={{marginTop: "2em"}}>
       <h1>Welcome</h1>
 
       {user ? <pre>{user.email}</pre> : <pre>Not Logged in</pre>}
