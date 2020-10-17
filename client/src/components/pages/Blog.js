@@ -16,7 +16,7 @@ export default function Blog(props) {
   };
 
   return (
-    <div className="container grid-lg">
+    <div className="container grid-lg" style={{marginTop: "2em"}}>
       <h1>Blog Page</h1>
       <h3>{userData.test}</h3>
       <p>
