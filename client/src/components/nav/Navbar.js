@@ -29,9 +29,6 @@ export default function Navbar() {
         <Link to="/blog" className="btn btn-link nav-link">
           Blog
         </Link>
-        <Link to="/about" className="btn btn-link nav-link">
-          About
-        </Link>
         { user && user.isAdmin ?
         <Link to="/admin" className="btn btn-link nav-link">
           Admin
