@@ -14,7 +14,6 @@ export default function Blog() {
     const fetchPosts = async () => {
       try {
         const posts = await axios.get("/api/blog");
-        console.log(posts.data);
         setPosts(posts.data.posts);
       } catch (err) {
         console.error(err);
@@ -24,8 +23,8 @@ export default function Blog() {
   }, []);
 
   if (posts){
-    renderPosts = posts.map(post =>
-    <div key={post.id} className="card" style={{borderStyle: "none"}}>
+    renderPosts = posts.map((post, index) =>
+    <div key={index} className="card" style={{borderStyle: "none"}}>
         <div className="card-image">
           
         </div>
