@@ -20,7 +20,7 @@ export default function Navbar() {
   return (
     <header className="navbar p-2">
       <section className="navbar-section text-bold">
-      <Link href="/" className="navbar-brand mr-2"><img src="./cycle.png" alt="cycle logo" height="30" width="40"/></Link>
+      <Link to="/" className="navbar-brand mr-2"><img src="./cycle.png" alt="cycle logo" height="30" width="40"/></Link>
         <Link to="/" className="btn btn-link nav-link">
           Home
         </Link>
