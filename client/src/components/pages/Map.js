@@ -1,4 +1,4 @@
-import React, {useState, useRef, useCallback} from "react";
+import React, {useState, useEffect, useRef, useCallback} from "react";
 import { GoogleMap, useLoadScript, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import axios from "axios";
 
@@ -18,6 +18,20 @@ const center = {
 }
 
 export default function Map() {
+    useEffect(() => {
+        const getMarkers = async () => {
+            try{
+           const markers = await axios.get("/api/location");
+           console.log(markers.data.data);
+           setMarkers(markers.data.data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getMarkers();
+        
+        
+    }, [])
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
@@ -25,7 +39,6 @@ export default function Map() {
 
     const [selected, setSelected] = useState(null);
     const [markers, setMarkers] = useState([]);
-    const [saveMarker, setSaveMarker] = useState({});
 
     const mapRef = useRef();
     // const onUnmount = useCallback(function callback(map) {
@@ -38,10 +51,11 @@ export default function Map() {
         if (name && name.trim() !== ""){
         setMarkers((current) => [...current, 
             {
-              lat: e.latLng.lat(),
-              lng: e.latLng.lng(),
+                location:{
+                    coordinates: [e.latLng.lng(), e.latLng.lat()]
+                },
               placeName: name,
-              time: new Date(),
+              date: new Date(),
             },
           ]
         );
@@ -79,7 +93,7 @@ export default function Map() {
           onLoad={onMapLoad}
         //   onUnmount={onUnmount}
         >
-            {markers.map(marker => <Marker key={marker.time.toISOString()} position={{lat: marker.lat, lng: marker.lng}} 
+            {markers.map(marker => <Marker key={marker.date} position={{lat: marker.location.coordinates[1], lng: marker.location.coordinates[0]}} 
             icon={{
                 url: './bicycle.svg',
                 scaledSize: new window.google.maps.Size(30,30),
@@ -90,12 +104,12 @@ export default function Map() {
                 setSelected(marker);
             }}
             />)}
-            {selected ? (<InfoWindow position={{lat: selected.lat, lng: selected.lng}} onCloseClick={() => {
+            {selected ? (<InfoWindow position={{lat: selected.location.coordinates[1], lng: selected.location.coordinates[0]}} onCloseClick={() => {
                 setSelected(null);
             }}>
                 <div>
                     <h2>{selected.placeName}</h2>
-                    <p>Lat: {selected.lat} Lng: {selected.lng}</p>
+                    <p>Lat: {selected.location.coordinates[1]} Lng: {selected.location.coordinates[0]}</p>
                 </div>
             </InfoWindow>) : null}
         </GoogleMap>
