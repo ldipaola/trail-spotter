@@ -12,9 +12,13 @@ export default function Navbar() {
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    const logOut = await logout();
+    try{
+    await logout();
     setUser(null);
     history.push("/");
+    } catch(err) {
+      console.error(err);
+    }
   };
 
   return (
