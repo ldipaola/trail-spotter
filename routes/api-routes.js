@@ -4,11 +4,18 @@ const db = require("../models");
 const ObjectId = require("mongodb").ObjectId;
 const passport = require("../config/passport");
 
-router.get("/api/blog", (req, res) => {
-  // Will add to this later
-  res.json({
-    test: "test blog",
-  });
+router.get("/api/blog", async (req, res) => {
+  try {
+    const posts = await db.Blog.find();
+    return res.status(200).json({
+      success: true,
+      count: posts.length,
+      posts
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
 // Using the passport.authenticate middleware with our local strategy.
