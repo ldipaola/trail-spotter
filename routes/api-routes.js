@@ -72,4 +72,30 @@ router.post("/api/post", async (req, res) => {
     .catch((err) => console.log(err));
 });
 
+router.get("/api/location", async (req, res) => {
+  try {
+    const locations = await db.Location.find();
+    return res.status(200).json({
+      success: true,
+      count: locations.length,
+      data: locations
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+router.post("/api/location", async (req, res) => {
+  try {
+    const location = await db.Location.create(req.body);
+    return res.status(200).json({
+      success: true,
+      data: location
+    })
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 module.exports = router;
