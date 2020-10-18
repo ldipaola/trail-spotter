@@ -6,7 +6,7 @@ import Navbar from "./components/nav/Navbar"
 import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup"
 import Home from "./components/pages/Home";
-import Blog from "./components/pages/Blog";
+import Blog from "./components/blog/Blog";
 import User from "./components/pages/User";
 import Admin from "./components/pages/Admin";
 import Hero from "./components/hero/Hero";
@@ -45,7 +45,6 @@ function App()  {
             <Route path="/signup" component={Signup} />
             <Route exact path="/" component={Home} />
             <Route path="/map" component={Map} />
-            <Route path="/blog" component={Blog} />
             <Route path="/user" component={User} />
             <Route path="/admin" component={Admin} />
             </UserContext.Provider>
