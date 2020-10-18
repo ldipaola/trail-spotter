@@ -22,7 +22,6 @@ export default function Map() {
         const getMarkers = async () => {
             try{
            const markers = await axios.get("/api/location");
-           console.log(markers.data.data);
            setMarkers(markers.data.data);
             } catch (err) {
                 console.log(err);
@@ -47,6 +46,7 @@ export default function Map() {
 
     const onMapClick = useCallback((e) => {
         const name = prompt("Enter location name:");
+        const description = prompt("Enter location description:");
         
         if (name && name.trim() !== ""){
         setMarkers((current) => [...current, 
@@ -55,6 +55,7 @@ export default function Map() {
                     coordinates: [e.latLng.lng(), e.latLng.lat()]
                 },
               placeName: name,
+              description: description,
               date: new Date(),
             },
           ]
@@ -66,6 +67,7 @@ export default function Map() {
                 coordinates: [e.latLng.lng(), e.latLng.lat()]
             },
               placeName: name,
+              description: description,
         });
     } catch (err) {
         console.error(err);
@@ -109,6 +111,7 @@ export default function Map() {
             }}>
                 <div>
                     <h2>{selected.placeName}</h2>
+                    {selected.description ? <p>{selected.description}</p> : null}
                     <p>Lat: {selected.location.coordinates[1]} Lng: {selected.location.coordinates[0]}</p>
                 </div>
             </InfoWindow>) : null}
