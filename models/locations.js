@@ -7,6 +7,7 @@ const locationSchema  = new Schema({
         required: [true, "Please add a place name"],
         trim: true,
     },
+    description: String,
     location: {
         type: {
           type: String, 
