@@ -20,15 +20,13 @@ export default function Navbar() {
   return (
     <header className="navbar p-2">
       <section className="navbar-section text-bold">
+      <Link href="/" className="navbar-brand mr-2"><img src="./cycle.png" alt="cycle logo" height="30" width="40"/></Link>
         <Link to="/" className="btn btn-link nav-link">
           Home
         </Link>
-        <Link to="/map" className="btn btn-link nav-link">
+        {user  ? <Link to="/map" className="btn btn-link nav-link">
           Map
-        </Link>
-        <Link to="/blog" className="btn btn-link nav-link">
-          Blog
-        </Link>
+        </Link> : null}
         { user && user.isAdmin ?
         <Link to="/admin" className="btn btn-link nav-link">
           Admin
