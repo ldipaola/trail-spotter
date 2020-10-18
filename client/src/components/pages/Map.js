@@ -5,7 +5,7 @@ import axios from "axios";
 const libraries = ["places"];
 const mapContainerStyle = {
     width: '100vw',
-    height: '100vh'
+    height: '94.5vh'
 }
 const options = {
     // styles: mapStyles,
@@ -83,7 +83,7 @@ export default function Map() {
     if (!isLoaded) return "Loading Map..";
     
     return (
-      <div className="flex-centered" style={{ margin: "2em 0 8px 0" }}>
+      <div className="flex-centered" style={{ margin: "0 0 0 0" }}>
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
           zoom={8}
