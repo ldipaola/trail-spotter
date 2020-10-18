@@ -6,7 +6,6 @@ import Navbar from "./components/nav/Navbar"
 import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup"
 import Home from "./components/pages/Home";
-import Blog from "./components/blog/Blog";
 import User from "./components/pages/User";
 import Admin from "./components/pages/Admin";
 import Hero from "./components/hero/Hero";
