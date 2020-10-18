@@ -37,7 +37,10 @@ function App()  {
             <Switch>
             <UserContext.Provider value={value}>
             <Navbar />
+            <Switch>
+              <Route path="/map" />
             <Hero />
+            </Switch>
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/" component={Home} />
