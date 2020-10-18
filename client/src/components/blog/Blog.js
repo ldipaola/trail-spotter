@@ -25,7 +25,7 @@ export default function Blog() {
 
   if (posts){
     renderPosts = posts.map(post =>
-    <div className="card" style={{borderStyle: "none"}}>
+    <div key={post.id} className="card" style={{borderStyle: "none"}}>
         <div className="card-image">
           
         </div>
