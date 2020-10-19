@@ -17,6 +17,10 @@ app.use(
   session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
 );
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
 app.use(passport.initialize());
 app.use(passport.session());
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/trailsDB", {
